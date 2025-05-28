@@ -1,31 +1,85 @@
 import React from 'react';
+import { Container, Typography, Box, List, ListItem, ListItemIcon, ListItemText, Link, Fade } from '@mui/material'; // Added Fade
+import { Phone, Email, LinkedIn, GitHub, Code as LeetCodeIcon } from '@mui/icons-material'; // Renamed Code to LeetCodeIcon
+
+const contactItems = [
+  {
+    icon: <Phone />,
+    primary: "Phone",
+    secondaryLink: "tel:9080274778",
+    secondaryText: "9080274778",
+  },
+  {
+    icon: <Email />,
+    primary: "Email (Personal)",
+    secondaryLink: "mailto:bharaneedharan2004@gmail.com",
+    secondaryText: "bharaneedharan2004@gmail.com",
+  },
+  {
+    icon: <Email />,
+    primary: "Email (Academic)",
+    secondaryLink: "mailto:bharaneedharan.cb22@bitsathy.ac.in",
+    secondaryText: "bharaneedharan.cb22@bitsathy.ac.in",
+  },
+  {
+    icon: <LinkedIn />,
+    primary: "LinkedIn",
+    secondaryLink: "https://linkedin.com/in/Bharaneedharan-K",
+    secondaryText: "linkedin.com/in/Bharaneedharan-K",
+    targetBlank: true,
+  },
+  {
+    icon: <GitHub />,
+    primary: "GitHub",
+    secondaryLink: "https://github.com/Bharaneedharan-K",
+    secondaryText: "github.com/Bharaneedharan-K",
+    targetBlank: true,
+  },
+  {
+    icon: <LeetCodeIcon />,
+    primary: "LeetCode",
+    secondaryLink: "https://leetcode.com/Bharaneedharan-K",
+    secondaryText: "leetcode.com/Bharaneedharan-K",
+    targetBlank: true,
+  },
+];
 
 function Contact() {
   return (
-    <section id="contact">
-      <h2>Contact</h2>
-      <p><strong>Phone:</strong> <a href="tel:9080274778">9080274778</a></p>
-      <p><strong>Email (Personal):</strong> <a href="mailto:bharaneedharan2004@gmail.com">bharaneedharan2004@gmail.com</a></p>
-      <p><strong>Email (Academic):</strong> <a href="mailto:bharaneedharan.cb22@bitsathy.ac.in">bharaneedharan.cb22@bitsathy.ac.in</a></p>
-      <p>
-        <strong>LinkedIn:</strong> 
-        <a href="https://linkedin.com/in/Bharaneedharan-K" target="_blank" rel="noopener noreferrer">
-          linkedin.com/in/Bharaneedharan-K
-        </a>
-      </p>
-      <p>
-        <strong>GitHub:</strong> 
-        <a href="https://github.com/Bharaneedharan-K" target="_blank" rel="noopener noreferrer">
-          github.com/Bharaneedharan-K
-        </a>
-      </p>
-      <p>
-        <strong>LeetCode:</strong> 
-        <a href="https://leetcode.com/Bharaneedharan-K" target="_blank" rel="noopener noreferrer">
-          leetcode.com/Bharaneedharan-K
-        </a>
-      </p>
-    </section>
+    <Box component="section" id="contact" sx={{ py: 5 }}>
+      <Container maxWidth="md">
+        <Fade in={true} timeout={800}>
+          {/* Wrap the main content of the section */}
+          <Box>
+            <Typography variant="h4" component="h2" gutterBottom align="center">
+              Contact
+            </Typography>
+            <List>
+              {contactItems.map((item, index) => (
+                <ListItem key={index} disablePadding sx={{ mb: 1.5 }}> {/* Added some margin bottom */}
+                  <ListItemIcon>
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.primary}
+                    secondary={
+                      <Link 
+                        href={item.secondaryLink} 
+                        target={item.targetBlank ? "_blank" : undefined} 
+                        rel={item.targetBlank ? "noopener noreferrer" : undefined}
+                        color="inherit" // To ensure link color adapts to theme
+                      >
+                        {item.secondaryText}
+                      </Link>
+                    }
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </Fade>
+      </Container>
+    </Box>
   );
 }
 
